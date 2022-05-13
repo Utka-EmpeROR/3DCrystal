@@ -90,7 +90,7 @@ namespace _3DCrystal
         private void DefineModel(Model3DGroup group)
         {
             SelectableModels.Clear();
-            if(CurrentMolecule == null)
+            if (CurrentMolecule == null)
             {
 
                 Point3D point1 = new Point3D(-3, 2, 2);
@@ -125,7 +125,7 @@ namespace _3DCrystal
 
             foreach (var atom in CurrentMolecule.Atoms)
             {
-                double rad = atom.AtomicRadius != null ? (double)atom.AtomicRadius/2000 : 0.04;
+                double rad = atom.AtomicRadius != null ? (double)atom.AtomicRadius / 2000 : 0.04;
                 MeshGeometry3D mesh = new MeshGeometry3D();
                 mesh.AddSphere(new Point3D(atom.Location.X, atom.Location.Y, atom.Location.Z), rad, 20, 10);
                 var model = mesh.MakeModel(Brushes.Green);
@@ -133,7 +133,7 @@ namespace _3DCrystal
                 group.Children.Add(model);
                 SelectableModels.Add(model);
             }
-            foreach(var bond in CurrentMolecule.Bonds)
+            foreach (var bond in CurrentMolecule.Bonds)
             {
                 MeshGeometry3D mesh = new MeshGeometry3D();
                 mesh.AddLine(new Point3D(bond.Atom1.Location.X, bond.Atom1.Location.Y, bond.Atom1.Location.Z),
@@ -149,13 +149,13 @@ namespace _3DCrystal
             DiffuseMaterial mat = new DiffuseMaterial(brush);
             model.Material = mat;
         }
-        
+
         private void LoadFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            if(dialog.ShowDialog() == true)
+            if (dialog.ShowDialog() == true)
             {
-                if(System.IO.Path.GetExtension(dialog.FileName)!= ".cif")
+                if (System.IO.Path.GetExtension(dialog.FileName) != ".cif")
                 {
                     MessageBox.Show("Некорректный формат файла! Требуется файл с расширением .cif");
                     return;
@@ -172,9 +172,9 @@ namespace _3DCrystal
                 }
                 var mol = new ChemSharp.Molecules.Molecule(provider.Atoms, provider.Bonds);
                 string result = mol.Atoms.Count.ToString() + ":" + Environment.NewLine;
-                foreach(var atom in mol.Atoms)
+                foreach (var atom in mol.Atoms)
                 {
-                   result+= atom.ToString() + Environment.NewLine;
+                    result += atom.ToString() + Environment.NewLine;
                 }
                 MessageBox.Show(result);
                 CurrentMolecule = mol;
@@ -222,7 +222,7 @@ namespace _3DCrystal
                 {
                     SelectedModel = model;
                     SelectedModel.Material = SelectedMaterial;
-                    if(CurrentMolecule != null)
+                    if (CurrentMolecule != null)
                     {
                         SelectedAtom = CurrentMolecule.Atoms[SelectableModels.IndexOf(model)];
                         ShowAtomInfo();
@@ -246,6 +246,8 @@ namespace _3DCrystal
             AtomTitleTextBox.Clear();
             AtomElectronegativityTextBox.Clear();
             AtomGroupTextBox.Clear();
+            SelectedAtomTextBox.Clear();
+            DistanceDataGrid.ItemsSource = null;
         }
 
         private void ShowAtomInfo()
@@ -261,6 +263,34 @@ namespace _3DCrystal
             AtomTitleTextBox.Text = SelectedAtom.Title;
             AtomElectronegativityTextBox.Text = SelectedAtom.Electronegativity.ToString();
             AtomGroupTextBox.Text = SelectedAtom.Group.ToString();
+            SelectedAtomTextBox.Text = SelectedAtom.ToString();
+        }
+
+        private void CalcDistanceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedAtom == null || SelectedAtomTextBox == null)
+            {
+                return;
+            }
+            List<AtomDistance> atomDists = new List<AtomDistance>();
+            foreach(var atom in CurrentMolecule.Atoms)
+            {
+                atomDists.Add(new AtomDistance(atom.ToString(), atom.DistanceTo(SelectedAtom)));
+            }
+            DistanceDataGrid.ItemsSource = null;
+            DistanceDataGrid.ItemsSource = atomDists;
+        }
+    }
+
+    class AtomDistance
+    {
+        public string Atom { get; set; }
+        public double Distance { get; set; }
+
+        public AtomDistance(string atom, double distance)
+        {
+            Atom = atom;
+            Distance = distance;
         }
     }
 }

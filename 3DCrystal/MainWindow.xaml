@@ -42,7 +42,12 @@
                     </Grid>
                 </TabItem>
                 <TabItem Header="Atoms distance">
-                    <Grid Background="#FFE5E5E5"/>
+                    <Grid Background="#FFE5E5E5">
+                        <DataGrid x:Name="DistanceDataGrid" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,120,10,18"/>
+                        <Button x:Name="CalcDistance" Content="Вычислить расстояния" HorizontalAlignment="Left" Margin="60,74,0,0" VerticalAlignment="Top" Height="26" Width="154" Click="CalcDistanceButton_Click"/>
+                        <TextBox x:Name="SelectedAtomTextBox" HorizontalAlignment="Center" IsReadOnly="True" Margin="0,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" Height="25"/>
+                        <Label Content="Выбранный атом" HorizontalAlignment="Left" Margin="83,10,0,0" VerticalAlignment="Top"/>
+                    </Grid>
                 </TabItem>
             </TabControl>
             <Label Content="Файл с информацией о соединении: (.cif)" HorizontalAlignment="Left" Margin="505,438,0,0" VerticalAlignment="Top" Width="285" Height="29"/>
