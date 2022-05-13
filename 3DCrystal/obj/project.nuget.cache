@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "7hn9wNx5cR0sFzQ0GKSK53fTvwKgtYhlqXNlDIlLIoYBro+InR77wY6d6f21lVfCsuTKhhlnBiEhEs6EwwVb7A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\maxim\\source\\repos\\3DCrystal\\3DCrystal\\3DCrystal.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maxim\\.nuget\\packages\\chemsharp\\1.0.15\\chemsharp.1.0.15.nupkg.sha512",
+    "C:\\Users\\maxim\\.nuget\\packages\\chemsharp.molecules\\1.0.15\\chemsharp.molecules.1.0.15.nupkg.sha512",
+    "C:\\Users\\maxim\\.nuget\\packages\\mathnet.numerics\\4.15.0\\mathnet.numerics.4.15.0.nupkg.sha512",
+    "C:\\Users\\maxim\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\maxim\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
+    "C:\\Users\\maxim\\.nuget\\packages\\system.text.json\\6.0.1\\system.text.json.6.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
